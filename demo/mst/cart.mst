@@ -12,7 +12,7 @@
     <div>{{product.description}}</div>
     <div class="input-group col-xs-3 spacer-top">
       <span class="input-group-addon glyphicon glyphicon-minus" onclick="addItem('{{product_id}}', {{quantity}} - 1)"></span>
-      <input type="text" class="form-control text-center" style="min-width:60px;" value=" {{quantity}}"
+      <input type="text" class="form-control text-center" style="min-width:60px;" value="{{quantity}}"
         onchange="addItem('{{product_id}}', this.value)">
       <span class="input-group-addon glyphicon glyphicon-plus" onclick="addItem('{{product_id}}', {{quantity}} + 1)"></span>
       <span class="input-group-addon glyphicon glyphicon-trash" onclick="removeItem('{{product_id}}');"></span>
@@ -27,7 +27,7 @@
   <div class="col-xs-9 spacer-top-sm">Subtotal ({{items_quantity}} Item(s)):</div>
   <div class="col-xs-3 spacer-top-sm text-right">{{formatted.subtotal}}</div>
   <div class="col-xs-9 spacer-top-sm">Total:</div>
-  <div class="col-xs-3 spacer-top-sm text-right">{{cart.formatted.total}}</div>
+  <div class="col-xs-3 spacer-top-sm text-right">{{formatted.total}}</div>
   <div class="col-xs-12 spacer-top-sm">
     <button type="button" class="btn btn-sm btn-primary" style="width:100%;" aria-label="Checkout" onclick="storefrontSDK.cart().checkout();">
       Checkout</button>
