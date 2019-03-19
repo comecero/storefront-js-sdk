@@ -1,4 +1,10 @@
 let Cart = function(config, storage, sendAsync) {
+  const requiredConfigValues = ['appAlias', 'appPage'];
+  for (const idx in requiredConfigValues) {
+    const key = requiredConfigValues[idx];
+    if (!config['cart'][key]) throw "missing required configuration value: cart." + key;
+  }
+
   const setCartStorage = function(cart) {
     if (!cart) return null;
     if (cart.currency) storage.set('currency', cart.currency);
@@ -138,9 +144,9 @@ let Cart = function(config, storage, sendAsync) {
           // immediate check if cart is still open.
           storage.removeCache('cart');
 
-          let appUrl = 'https://' + config.appHost + '/' + config['appAlias'] + '/';
-          let redirectUri = '/' + config['appAlias'] + '/';
-          if (config['appPage']) redirectUri += '#/' + config['appPage'];
+          let appUrl = 'https://' + config.appHost + '/' + config['cart']['appAlias'] + '/';
+          let redirectUri = '/' + config['cart']['appAlias'] + '/';
+          if (config['cart']['appPage']) redirectUri += '#/' + config['cart']['appPage'];
 
           let url = appUrl + 'oauth/callback.html#access_token=' + token + '&cart_id=' + cart.cart_id + '&redirect_uri=' + encodeURIComponent(redirectUri);
           window.location = url;

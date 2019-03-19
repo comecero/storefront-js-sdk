@@ -1,6 +1,6 @@
 # storefront-sdk.js
 
-### Version: 0.9.4
+### Version: 0.9.5
 
 This library allows an account to host carts on their website without redirecting customers to
 hosted carts.  Our goal for this library that does NOT rely on any javascript library/framework so it can be
@@ -10,11 +10,18 @@ expected to cause issues or prevent the use of this library.
 
 ## Example Usage:
 ```javascript
-  let config = {"accountID": "Your account ID here", ...};
+  let config = {
+    'appHost': 'demo-account.apps.comecero.com',
+    'accountID': 'DA1113',
+    'cart': {
+      'appAlias': 'shopping-cart',
+      'appPage': 'cart'
+    }
+  };
   var storefrontSDK = new StorefrontSDK(config);
   storefrontSDK.cart().addItem('1001').then(
     function(cart) {
-      // Do something with cart such as render cart
+      // Do something with cart such as render as html on web page.
     },
     function(error) {
       // Do something with error such as remove cart and display an error.
@@ -23,19 +30,21 @@ expected to cause issues or prevent the use of this library.
 ```
 
 
-## Configuration options:
+## Global Configuration options:
 * appHost: The application host specified for your account (Test or Live).  Found in Settings --> Technical
 
 * accountID: Your account ID.
-
-* appAlias: The app alias that the checkout should redirect to.
-
-* appPage: The page of the app the customer should start on when redirected to checkout.
 
 * cacheTimeout: Optional browser cache of data before refreshing from the api (Default: 300).
 
 * testToken: Provide this only for testing purposes.  Do not hard code into your app. (Default: null).
 
+## Cart Configuration options:
+* appAlias: The app alias that the checkout should redirect to.
+
+* appPage: The page of the app the customer should start on when redirected to checkout.
+
+* expand: A comma separated list of resources to expand. See API documentation for fields that can be expanded.
 
 ## Public methods:
 * cart(): gets the cart service.

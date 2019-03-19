@@ -2,7 +2,7 @@ var StorefrontSDK = function(config) {
   //%= body %
 
   if (!window.Promise || !window.localStorage) throw "Browser does not support ES6";
-  const requiredConfigValues = ['appHost', 'accountID', 'appAlias', 'appPage'];
+  const requiredConfigValues = ['appHost', 'accountID'];
   const defaultConfig = {cacheTimeout: 300};
 
   // Lets set some defaults if needed.

@@ -1,5 +1,5 @@
 /*
-  Comecero Data Export version: 0.9.4
+  Comecero Data Export version: 0.9.5
   https://comecero.com
   https://github.com/comecero/data-export
   Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -7,6 +7,15 @@
 
 var StorefrontSDK = function (config) {
     let Cart = function (config, storage, sendAsync) {
+        const requiredConfigValues = [
+            'appAlias',
+            'appPage'
+        ];
+        for (const idx in requiredConfigValues) {
+            const key = requiredConfigValues[idx];
+            if (!config['cart'][key])
+                throw 'missing required configuration value: cart.' + key;
+        }
         const setCartStorage = function (cart) {
             if (!cart)
                 return null;
@@ -152,10 +161,10 @@ var StorefrontSDK = function (config) {
                     // Remove cart from cache to force an
                     // immediate check if cart is still open.
                     storage.removeCache('cart');
-                    let appUrl = 'https://' + config.appHost + '/' + config['appAlias'] + '/';
-                    let redirectUri = '/' + config['appAlias'] + '/';
-                    if (config['appPage'])
-                        redirectUri += '#/' + config['appPage'];
+                    let appUrl = 'https://' + config.appHost + '/' + config['cart']['appAlias'] + '/';
+                    let redirectUri = '/' + config['cart']['appAlias'] + '/';
+                    if (config['cart']['appPage'])
+                        redirectUri += '#/' + config['cart']['appPage'];
                     let url = appUrl + 'oauth/callback.html#access_token=' + token + '&cart_id=' + cart.cart_id + '&redirect_uri=' + encodeURIComponent(redirectUri);
                     window.location = url;
                     resolve(true);
@@ -304,6 +313,11 @@ var StorefrontSDK = function (config) {
         // key used for local storage.
         const localStorageKey = 'storefront-js-sdk-' + config['accountID'];
         const ttl = config['cacheTimeout'];
+        const isExpired = function (expires) {
+            const now = Date.now();
+            const expiresDate = expires ? new Date(parseInt(expires)) : now;
+            return now >= expiresDate;
+        };
         this.get = function (key) {
             const json = window.localStorage.getItem(localStorageKey);
             if (!json)
@@ -325,13 +339,13 @@ var StorefrontSDK = function (config) {
             window.localStorage.setItem(localStorageKey, JSON.stringify(data));
         };
         this.purgeCache = function () {
-            const data = this.get('_cache');
+            let data = this.get('_cache');
             if (!data)
                 return;
             let purged = false;
             for (let key in data) {
                 let value = data[key];
-                if (this.isExpired(value.expires)) {
+                if (isExpired(value.expires)) {
                     purged = true;
                     delete data[key];
                 }
@@ -373,11 +387,6 @@ var StorefrontSDK = function (config) {
             const token = this.get('testToken');
             return token && token.length > 0;
         };
-        this.isExpired = function (expires) {
-            const now = Date.now();
-            const expiresDate = expires ? new Date(parseInt(expires)) : now;
-            return now >= expiresDate;
-        };
         this.currencyMatch = function (obj) {
             const currency = this.get('currency');
             return !currency || !obj || !obj.currency || currency == obj.currency;
@@ -411,9 +420,7 @@ var StorefrontSDK = function (config) {
         throw 'Browser does not support ES6';
     const requiredConfigValues = [
         'appHost',
-        'accountID',
-        'appAlias',
-        'appPage'
+        'accountID'
     ];
     const defaultConfig = { cacheTimeout: 300 };    // Lets set some defaults if needed.
     // Lets set some defaults if needed.

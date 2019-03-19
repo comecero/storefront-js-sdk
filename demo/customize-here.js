@@ -1,3 +1,14 @@
+/*
+ * Javascript in this file is an example of how to consume the storefront SDK.  This is an example and you are
+ * free to use it as a basis for your needs.  Bare in mind, you site may not need all of it and only pieces.
+ * We recommend implementing what you need and use assets that your site currently uses to help minimize load
+ * times.
+ *
+ * This example uses mustache.js to render html on the page and is just one library that does this. You should
+ * research alternatives and evaluate the pros and cons based on your meeds.
+ *
+ */
+
 let templateCache = {};
 let renderTemplate = function(templateUri, view) {
   return new Promise(function(resolve, reject) {
@@ -28,47 +39,40 @@ let renderTemplate = function(templateUri, view) {
   });
 }
 
-let renderDropdownCart = function(cart) {
-  let output = document.getElementById("cartButton");
-  if (!output) return;
-  renderTemplate('mst/cart-dropdown.mst', cart).then(function(rendered) {
-    output.innerHTML = rendered;
-  }, function(error) {
-    console.log(error);
-  });
-}
-
-let renderCart = function(cart) {
-  let output = document.getElementById("cart");
-  if (!output) return;
-  renderTemplate('mst/cart.mst', cart).then(function(rendered) {
-    output.innerHTML = rendered;
-  }, function(error) {
-    console.log(error);
-  });
-}
-
 let render = function(cart) {
   let currencySelect = document.getElementById("currency");
   if (!cart) cart = {items_count: 0};
   if (currencySelect && cart.currency) currencySelect.value = cart.currency;
-  renderDropdownCart(cart);
-  renderCart(cart);
+
+  let cartButtonElement = document.getElementById("cartButton");
+  if (cartButtonElement) {
+    renderTemplate('mst/cart-dropdown.mst', cart).then(function(rendered) {
+      cartButtonElement.innerHTML = rendered;
+    }, function(error) {
+      console.log(error);
+    });
+  }
+
+  let cartElement = document.getElementById("cart");
+  if (cartElement) {
+    renderTemplate('mst/cart.mst', cart).then(function(rendered) {
+      cartElement.innerHTML = rendered;
+    }, function(error) {
+      console.log(error);
+    });
+  }
 }
 
-
-let config = {
+var storefrontSDK = new StorefrontSDK({
   'appHost': 'demo-account-test.apps.comecero.com',
   'accountID': 'DA1113',
-  'appAlias': 'shopping-cart',
-  'appPage': 'cart',
   'testToken': 'public',
-  'expand': {
-    'cart': 'items.product'
+  'cart': {
+    'appAlias': 'shopping-cart',
+    'appPage': 'cart',
+    'expand': 'items.product'
   }
-};
-
-var storefrontSDK = new StorefrontSDK(config);
+});
 
 var handleError = function(error) {
   console.log(error);

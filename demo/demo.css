@@ -4,7 +4,7 @@
 .spacer-bottom {margin-bottom: 32px;}
 #cartDropdown {
   position: fixed;
-  top:50px;
+  top:40px;
   right:5px;
   z-index: 100;
   background-color: #fff;

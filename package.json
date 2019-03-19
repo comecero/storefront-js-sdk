@@ -1,6 +1,6 @@
 {
   "name": "storefront-js-sdk",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "Storefront JS SDK for hosting carts remotely",
   "main": "dist/storefront-sdk.js",
   "repository": {

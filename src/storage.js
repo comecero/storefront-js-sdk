@@ -3,6 +3,12 @@ let Storage = function(config) {
   const localStorageKey = 'storefront-js-sdk-' + config['accountID'];
   const ttl = config['cacheTimeout'];
 
+  const isExpired = function(expires) {
+    const now = Date.now();
+    const expiresDate = expires ? new Date(parseInt(expires)) : now;
+    return now >= expiresDate;
+  }
+
   this.get = function(key) {
     const json = window.localStorage.getItem(localStorageKey);
     if (!json) return null;
@@ -26,12 +32,12 @@ let Storage = function(config) {
   }
 
   this.purgeCache = function() {
-    const data = this.get('_cache');
+    let data = this.get('_cache');
     if (!data) return;
     let purged = false;
     for (let key in data) {
       let value = data[key];
-      if (this.isExpired(value.expires)) {
+      if (isExpired(value.expires)) {
         purged = true;
         delete data[key];
       }
@@ -71,12 +77,6 @@ let Storage = function(config) {
   this.isTest = function() {
     const token = this.get('testToken');
     return token && token.length > 0;
-  }
-
-  this.isExpired = function(expires) {
-    const now = Date.now();
-    const expiresDate = expires ? new Date(parseInt(expires)) : now;
-    return now >= expiresDate;
   }
 
   this.currencyMatch = function(obj) {
