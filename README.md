@@ -29,6 +29,9 @@ expected to cause issues or prevent the use of this library.
   );
 ```
 
+## Demo
+Try the demo at [demo/](demo/) using mustache.js as rendering engine (Not required).
+
 
 ## Global Configuration options:
 * appHost: The application host specified for your account (Test or Live).  Found in Settings --> Technical
