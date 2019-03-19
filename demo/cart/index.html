@@ -1,0 +1,29 @@
+<html>
+<head>
+  <title>Storefront JS SDK Demo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+  <link rel="stylesheet" href="../demo.css">
+</head>
+<body>
+<div class="container-fluid">
+  <div class="col-sm-10 spacer-bottom">
+    <h3>Storefront JS SDK Demo</h3>
+  </div>
+  <div class="col-sm-1 text-right spacer-bottom">
+    <select id="currency" onchange="changeCurrency()" style="font-size: 20px;">
+      <option value="" id="autoCurrency">Auto</option>
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+    </select>
+  </div>
+  <div class="col-sm-1 text-right spacer-bottom" id="cartButton"></div>
+
+  <div id="warningAlert" class="col-xs-offset-1 col-xs-10 alert alert-warning alert-dismissible hidden" role="alert" onclick="hideAlert();"></div>
+  <div id="cart"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+<script src="../../dist/storefront-sdk.min.js"></script>
+<script src="../customize-here.js"></script>
+</body>
+</html>

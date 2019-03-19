@@ -1,0 +1,21 @@
+{
+  "name": "storefront-js-sdk",
+  "version": "0.9.4",
+  "description": "Storefront JS SDK for hosting carts remotely",
+  "main": "dist/storefront-sdk.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comecero/storefront-js-sdk.git"
+  },
+  "author": "Comecero, LLC",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-concat": "*",
+    "gulp-rename": "*",
+    "gulp-terser": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-header": "*",
+    "gulp-wrap-js": "*"
+  }
+}

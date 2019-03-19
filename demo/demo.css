@@ -1,0 +1,22 @@
+[onclick] { cursor: pointer; }
+.spacer-top-sm {margin-top: 16px;}
+.spacer-top {margin-top: 32px;}
+.spacer-bottom {margin-bottom: 32px;}
+#cartDropdown {
+  position: fixed;
+  top:50px;
+  right:5px;
+  z-index: 100;
+  background-color: #fff;
+}
+.cart-border {
+  border: 1px solid #ddd;
+}
+.glyphicon-sm {
+  font-size: 10px;
+}
+#warningAlert {
+  font-family: "Courier New", monospace;
+  white-space: pre;
+  word-wrap: break-word;
+}

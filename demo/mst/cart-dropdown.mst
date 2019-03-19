@@ -1,0 +1,31 @@
+<button type="button" class="btn btn-default" aria-label="Cart" onclick="toggleCart();">
+  <span class="glyphicon glyphicon-shopping-cart"><span class="badge">{{items_count}}</span></span>
+</button>
+{{#items_count}}
+<div class="col-sm-4 col-xs-12 table-responsive hidden" id="cartDropdown" onmouseleave="toggleCart();">
+  <table class="table table-striped cart-border">
+    <tbody>
+      {{#items}}
+      <tr>
+        <td colspan="2"><sup>{{quantity}}x</sup>{{name}}</td>
+        <td class="text-right">{{formatted.total}}</td>
+      </tr>
+      {{/items}}
+      {{^items}}<tr><td colspan="3">Cart is empty</td></tr>{{/items}}
+      {{#formatted.total}}
+      <tr><td colspan="2" class="text-right">Total</td><td class="col-sm-1 text-right">{{formatted.total}}</td></tr>
+      {{/formatted.total}}
+      {{#items_count}}
+      <tr>
+        <td class="text-left">
+          <button type="button" class="btn btn-sm btn-default" aria-label="View Cart" onclick="gotoCart();">View Cart</button></td>
+        <td></td>
+        <td class="text-right">
+          <button type="button" class="btn btn-sm btn-primary" aria-label="Checkout" onclick="storefrontSDK.cart().checkout();">Checkout</button>
+        </td>
+      </tr>
+      {{/items_count}}
+    </tbody>
+  </table>
+</div>
+{{/items_count}}

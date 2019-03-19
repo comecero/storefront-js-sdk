@@ -1,0 +1,64 @@
+<html>
+<head>
+  <title>Storefront JS SDK Demo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<div class="container-fluid">
+  <div class="col-sm-10 spacer-bottom">
+    <h3>Storefront JS SDK Demo</h3>
+  </div>
+  <div class="col-sm-1 text-right spacer-bottom">
+    <select id="currency" onchange="changeCurrency()" style="font-size: 20px;">
+      <option value="" id="autoCurrency">Auto</option>
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+    </select>
+  </div>
+  <div class="col-sm-1 text-right spacer-bottom" id="cartButton"></div>
+
+  <div id="warningAlert" class="col-xs-offset-1 col-xs-10 alert alert-warning alert-dismissible hidden" role="alert" onclick="hideAlert();"></div>
+
+  <div class="col-sm-12 col-xs-12" id="products">
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-6 spacer-bottom text-center">
+        <div class="spacer-b12"><strong>PC Tune-Up - 3 pack</strong></div>
+        <div class="spacer-b12" data-product-price="pctune">$29.95</div>
+        <button type="button" class="btn btn-default" onclick="addItem('pctune');" ><span>Add To Cart</span></button>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 spacer-bottom text-center">
+        <div class="spacer-b12"><strong>Voila</strong></div>
+        <div class="spacer-b12">$14.99</div>
+        <button type="button" class="btn btn-default" onclick="addItem('voila');" ><span>Add To Cart</span></button>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 spacer-bottom text-center">
+        <div class="spacer-b12"><strong>Box of stuff</strong></div>
+        <div class="spacer-b12">$77.50</div>
+        <button type="button" class="btn btn-default" onclick="addItem('874347');" ><span>Add To Cart</span></button>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 spacer-bottom text-center">
+        <div class="spacer-b12"><strong>T-shirt</strong></div>
+        <div class="spacer-b12">$19.95</div>
+        <button type="button" class="btn btn-default" onclick="addItem('1001');" ><span>Add To Cart</span></button>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 spacer-bottom text-center">
+        <div class="spacer-b12"><strong>Not found product</strong></div>
+        <div class="spacer-b12">N/A</div>
+        <button type="button" class="btn btn-default" onclick="addItem('not_found');" ><span>Add To Cart</span></button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+<script src="../dist/storefront-sdk.js"></script>
+<script src="customize-here.js"></script>
+</body>
+</html>
