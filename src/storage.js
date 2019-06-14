@@ -92,7 +92,7 @@ let Storage = function(config) {
       data['testToken'] = token;
     }
     window.localStorage.setItem(localStorageKey, JSON.stringify(data));
-    window.localStorage.removeItem(localStorageCacheKey);
+    //window.localStorage.removeItem(localStorageCacheKey);
   }
 
   if (config['testToken']) {
